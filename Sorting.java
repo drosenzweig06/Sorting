@@ -63,4 +63,43 @@ public class Sorting
     {
         
     }
+    public void mergeSort(int[] array)
+    {
+        mergeSort(0, array.length-1, array);
+    }
+    public void mergeSort(int beg,int end, int[] array)
+    {
+        if(beg == end)
+        {
+            return;
+        }
+        else
+        {
+            int midpoint = (beg+end)/2;
+            mergeSort(beg, midpoint, array);
+            mergeSort(midpoint+1, end, array);
+            merge(beg, midpoint, end, array);
+        }
+    }
+    public void merge(int beg,int mid,int end, int[] array)
+    {
+        int curser1 = beg;
+        int curser2 = mid + 1;
+        int[] temp = array;
+        while(curser1 < mid+1 || curser2 < end+1)
+        {
+                if(temp[curser1] > temp[curser2])
+                {
+                    array[i] = array[curser2];
+                    curser2 += 1;
+                }
+                else if(temp[curser1] < temp[curser2])
+                {
+                    array[i] = array[curser1];
+                    curser1 += 1;
+                }
+        
+        }
+        
+    }
 }
