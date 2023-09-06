@@ -17,6 +17,9 @@ public class Sorting
     {
         int[] array1 = {5, 9, 13, 8, 4, 5};
         System.out.println(bubbleSorting(array1));
+        System.out.println(InsertionSort(array1));
+        mergeSort(array1);
+        System.out.println(Arrays.toString(array1));
     }
     public String bubbleSorting(int[] array)
     {
@@ -49,19 +52,30 @@ public class Sorting
             int minlocation = array[i];
             for(int j = i+1; j < array.length; j++)
             {
-                if(minlocation > array[j])
+                if(array[j] < minlocation)
                 {
                     minlocation = j;
                 }
             }
-            
         }
-
     }
-    
-    public void InsertionSort(int[] array)
+    public String InsertionSort(int[] array)
     {
-        
+        for(int i = 1; i < array.length; i++)
+        {
+        	int value = array[i];
+        	int place = i - 1;
+        	while(place > 0 && array[place]  > value)
+        	{
+        		array[place + 1] = array[place];
+        		place--;
+        	}
+        	array[place + 1] = value;
+
+        }
+        String Stringarray = Arrays.toString(array);
+        return Stringarray;
+
     }
     public void mergeSort(int[] array)
     {
@@ -83,23 +97,36 @@ public class Sorting
     }
     public void merge(int beg,int mid,int end, int[] array)
     {
-        int curser1 = beg;
-        int curser2 = mid + 1;
-        int[] temp = array;
-        while(curser1 < mid+1 || curser2 < end+1)
+        int cursor1 = beg;
+        int cursor2 = mid + 1;
+        int[] temp = new int[(end - beg)+1];
+        int i = 0;
+        while(cursor1 <= mid && cursor2 <= end)
         {
-                if(temp[curser1] > temp[curser2])
+                if(array[cursor1] < array[cursor2])
                 {
-                    array[i] = array[curser2];
-                    curser2 += 1;
+                    temp[i] = array[cursor1];
+                    cursor1++;
+                    i++;
                 }
-                else if(temp[curser1] < temp[curser2])
+                else
                 {
-                    array[i] = array[curser1];
-                    curser1 += 1;
+                    temp[i] = array[cursor2];
+                    cursor2++;
+                    i++;
                 }
-        
         }
-        
+        while(cursor1 <= mid)
+        {
+              temp[i] = array[cursor1];
+              cursor1++;
+              i++;
+        }
+        while(cursor2 <= end)
+        {
+            temp[i] = array[cursor2];
+            cursor2++;
+            i++;
+        }
     }
 }
